@@ -64,7 +64,7 @@ if (window.addEventListener) {
 									}									
 									
 									arrBoxShadow.push(x + "px " + y + "px #" + hex);
-								} else if (alpha > 1) {
+								} else if (alpha > 0) {
 									arrBoxShadow.push(x + "px " + y + "px rgba(" + 
 										[imageData.data[index], imageData.data[index + 1], imageData.data[index + 2], alpha].join() + 
 									")");
