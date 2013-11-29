@@ -14,16 +14,15 @@ label { display: block; height: 100px; border: 5px solid #a0b3d6; background-col
 label:hover { background-color: #cad5eb; cursor: pointer; }
 pre { display: none; font-size: 12px; background-color: #f5f5f5; border: 1px solid #ddd; padding: 5px 10px; font-family: Monaco, monospace; white-space: pre-wrap; word-wrap: break-word; }
 .show_image { -webkit-transition: all .35s; transition: all .35s; }
-.show_image i { display: block; width: 1px; height: 1px; }
+.show_image i { display: block; width: 1px; height: 1px; margin: -1px 0 0 -1px; }
 </style>
 </head>
 
 <body>
-<input id="file" type="file"><label for="file">请选择图片</label>
+<input id="file" type="file"><label for="file">请选择图片(小于100K)</label>
 <p id="showImage" class="show_image"><i></i></p>
 <pre></pre>
 
-<script src="http://www.zhangxinxu.com/study/js/zxx.color_exchange.js"></script>
 <script>
 if (window.addEventListener) {
 	var eleFile = document.querySelector("#file"), eleShow = document.querySelector("#showImage"), elePre = document.querySelector("pre");
@@ -51,15 +50,15 @@ if (window.addEventListener) {
 						// 遍历颜色参数值
 						for (var index = 0; index < length; index++) {		
 							if (index % 4 === 0) {
-								var x = index / 4 % width, y = Math.floor(index / 4 / width), alpha = Math.round(imageData.data[index + 3] / 255 * 100) / 100;
-								if (alpha == 1) {
+								var x = index / 4 % width + 1, y = Math.floor(index / 4 / width) + 1, alpha = Math.round(imageData.data[index + 3] / 255 * 100) / 100;
+								if (imageData.data[index + 3] == 255) {
 									var hex1 = imageData.data[index].toString(16), hex2 = imageData.data[index + 1].toString(16), hex3 = imageData.data[index + 2].toString(16);
-									if (hex1 == "0") hex1 = "00";
-									if (hex2 == "0") hex2 = "00";
-									if (hex3 == "0") hex3 = "00";
+									if (hex1.length == 1) hex1 = "0" + hex1;
+									if (hex2.length == 1) hex2 = "0" + hex2;
+									if (hex3.length == 1) hex3 = "0" + hex3;
 									
 									var hex = hex1 + hex2 + hex3;
-									if (hex1.slice(0,1) == hex1.slice(-1) && hex2.slice(0,1) == hex2.slice(-1) && hex2.slice(0,1) == hex2.slice(-1)) {
+									if (hex1.slice(0,1) == hex1.slice(-1) && hex2.slice(0,1) == hex2.slice(-1) && hex3.slice(0,1) == hex3.slice(-1)) {
 										hex = hex1.slice(-1) + hex2.slice(-1) + hex3.slice(-1);
 									}									
 									
@@ -80,7 +79,7 @@ if (window.addEventListener) {
 						
 						// 代码显示
 						elePre.style.display = "block";
-						elePre.innerHTML = "box-shadow: " + arrBoxShadow.join(", ");
+						elePre.innerHTML = "box-shadow: " + arrBoxShadow.join(",");
 					};
 					image.src = e.target.result;
 				}
