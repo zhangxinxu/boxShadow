@@ -7,7 +7,7 @@ How to use?
 <ol>
 	<li>Visit [here](http://rawgithub.com/zhangxinxu/boxShadow/master/box-shadow.html).</li>
 	<li>Select a image;</li>
-	<li>Done!<li>
+	<li>Done!</li>
 </ol>
 
 Good luck for you!
